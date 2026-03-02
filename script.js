@@ -8,7 +8,18 @@ function simpan(){
 localStorage.setItem("fiberData",JSON.stringify(data));
 }
 
-window.tambahData=function(){
+window.cariData=function(){
+
+let keyword=document.getElementById("search").value.toLowerCase();
+let rows=document.querySelectorAll("#dataFiber tr");
+
+rows.forEach(r=>{
+r.style.display=r.innerText.toLowerCase().includes(keyword)
+? ""
+: "none";
+});
+
+}
 
 let jalur = document.getElementById("jalur").value;
 let odp=document.getElementById("odp").value;
