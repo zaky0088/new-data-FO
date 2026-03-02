@@ -99,14 +99,15 @@ if(d.status==="Active") warna="active";
 if(d.status==="Putus") warna="putus";
 if(d.status==="Maintenance") warna="maintenance";
 
-tabel.innerHTML += `
-<tr class="${warna}">
+  tabel.innerHTML += `
+<tr>
 <td>${i+1}</td>
 <td>${d.jalur}</td>
 <td>${d.odp}</td>
 <td>${d.core}</td>
-<td>${d.panjang} m</td>
+<td>${d.panjang ? d.panjang + " m" : "-"}</td>
 <td>${d.teknisi}</td>
+<td class="${warna}">${d.status}</td>
 <td>
 <button onclick="edit(${i})">Edit</button>
 <button onclick="hapus(${i})">Hapus</button>
