@@ -10,7 +10,7 @@ localStorage.setItem("fiberData",JSON.stringify(data));
 
 window.tambahData=function(){
 
-let jalur=jalur.value;
+let jalur = document.getElementById("jalur").value;
 let odp=document.getElementById("odp").value;
 let core=document.getElementById("core").value;
 let panjang=document.getElementById("panjang").value;
@@ -42,7 +42,7 @@ if(d.status==="Active") warna="active";
 if(d.status==="Putus") warna="putus";
 if(d.status==="Maintenance") warna="maintenance";
 
-tabel.innerHTML+=`
+tabel.innerHTML += `
 <tr class="${warna}">
 <td>${i+1}</td>
 <td>${d.jalur}</td>
