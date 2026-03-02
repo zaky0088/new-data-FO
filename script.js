@@ -30,7 +30,22 @@ tampilkan();
 }
 
 function tampilkan(){
+function updateDashboard(){
 
+document.getElementById("totalJalur").innerText=data.length;
+
+let totalCore=0;
+let putus=0;
+
+data.forEach(d=>{
+totalCore+=Number(d.core);
+if(d.status==="Putus") putus++;
+});
+
+document.getElementById("totalCore").innerText=totalCore;
+document.getElementById("jalurPutus").innerText=putus;
+}
+  
 let tabel=document.getElementById("dataFiber");
 tabel.innerHTML="";
 
@@ -57,3 +72,5 @@ tabel.innerHTML += `
 }
 
 });
+
+updateDashboard();
