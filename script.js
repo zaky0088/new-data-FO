@@ -82,6 +82,24 @@ tabel.innerHTML += `
 });
 }
 
-});
+function hitungDashboard(){
+    let data = JSON.parse(localStorage.getItem("fiber")) || [];
 
+    let active = 0;
+    let putus = 0;
+
+    data.forEach(item => {
+        if(item.status === "Active"){
+            active += Number(item.core);
+        }
+
+        if(item.status === "Putus"){
+            putus += Number(item.core);
+        }
+    });
+
+    document.getElementById("totalActive").innerText = active;
+    document.getElementById("totalPutus").innerText = putus;
+}
+tampilData();
 updateDashboard();
