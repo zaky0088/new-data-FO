@@ -80,25 +80,7 @@ tabel.innerHTML += `
 <td><button onclick="hapus(${i})">Hapus</button></td>
 </tr>`;
 });
-}
 
-function hitungDashboard(){
-    let data = JSON.parse(localStorage.getItem("fiber")) || [];
+});
 
-    let active = 0;
-    let putus = 0;
-
-    data.forEach(item => {
-        if(item.status === "Active"){
-            active += Number(item.core);
-        }
-
-        if(item.status === "Putus"){
-            putus += Number(item.core);
-        }
-    });
-
-    document.getElementById("totalActive").innerText = active;
-    document.getElementById("totalPutus").innerText = putus;
-}
-tampilData();
+updateDasboard();
