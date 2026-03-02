@@ -27,6 +27,27 @@
 <button onclick="tambahData()">Tambah</button>
 </div>
 
+  <div class="dashboard">
+
+<div class="card">
+<h3>Total Jalur</h3>
+<p id="totalJalur">0</p>
+</div>
+
+<div class="card">
+<h3>Total Core Used</h3>
+<p id="totalCore">0</p>
+</div>
+
+<div class="card danger">
+<h3>Jalur Putus</h3>
+<p id="jalurPutus">0</p>
+</div>
+
+</div>
+
+<input type="text" id="search" placeholder="🔍 Cari ODP / Jalur..." onkeyup="cariData()">
+
 <table>
 <thead>
 <tr>
