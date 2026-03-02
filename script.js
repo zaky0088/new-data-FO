@@ -2,31 +2,24 @@ document.addEventListener("DOMContentLoaded", function(){
 
 let data = JSON.parse(localStorage.getItem("fiberData")) || [];
 
-tampilkan();
-
 function simpan(){
-localStorage.setItem("fiberData",JSON.stringify(data));
+  localStorage.setItem("fiberData", JSON.stringify(data));
 }
 
-window.cariData=function(){
-
-let keyword=document.getElementById("search").value.toLowerCase();
-let rows=document.querySelectorAll("#dataFiber tr");
-
-rows.forEach(r=>{
-r.style.display=r.innerText.toLowerCase().includes(keyword)
-? ""
-: "none";
-});
-
-}
+// ================= TAMBAH DATA =================
+window.tambahData = function(){
 
 let jalur = document.getElementById("jalur").value;
-let odp=document.getElementById("odp").value;
-let core=document.getElementById("core").value;
-let panjang=document.getElementById("panjang").value;
-let teknisi=document.getElementById("teknisi").value;
-let status=document.getElementById("status").value;
+let odp = document.getElementById("odp").value;
+let core = document.getElementById("core").value;
+let panjang = document.getElementById("panjang").value;
+let teknisi = document.getElementById("teknisi").value;
+let status = document.getElementById("status").value;
+
+if(!jalur || !odp){
+  alert("Isi data dulu!");
+  return;
+}
 
 data.push({jalur,odp,core,panjang,teknisi,status});
 
@@ -34,31 +27,49 @@ simpan();
 tampilkan();
 }
 
-window.hapus=function(i){
-data.splice(i,1);
-simpan();
-tampilkan();
+// ================= HAPUS =================
+window.hapus = function(i){
+  data.splice(i,1);
+  simpan();
+  tampilkan();
 }
 
-function tampilkan(){
+// ================= CARI =================
+window.cariData = function(){
+
+let keyword = document.getElementById("search").value.toLowerCase();
+let rows = document.querySelectorAll("#dataFiber tr");
+
+rows.forEach(r=>{
+  r.style.display =
+    r.innerText.toLowerCase().includes(keyword)
+    ? ""
+    : "none";
+});
+}
+
+// ================= DASHBOARD =================
 function updateDashboard(){
 
-document.getElementById("totalJalur").innerText=data.length;
+document.getElementById("totalJalur").innerText = data.length;
 
-let totalCore=0;
-let putus=0;
+let totalCore = 0;
+let putus = 0;
 
 data.forEach(d=>{
-totalCore+=Number(d.core);
-if(d.status==="Putus") putus++;
+  totalCore += Number(d.core);
+  if(d.status === "Putus") putus++;
 });
 
-document.getElementById("totalCore").innerText=totalCore;
-document.getElementById("jalurPutus").innerText=putus;
+document.getElementById("totalCore").innerText = totalCore;
+document.getElementById("jalurPutus").innerText = putus;
 }
-  
-let tabel=document.getElementById("dataFiber");
-tabel.innerHTML="";
+
+// ================= TAMPILKAN =================
+function tampilkan(){
+
+let tabel = document.getElementById("dataFiber");
+tabel.innerHTML = "";
 
 data.forEach((d,i)=>{
 
@@ -81,5 +92,10 @@ tabel.innerHTML += `
 </tr>`;
 });
 
+updateDashboard();
+}
 
-updateDasboard();
+// load awal
+tampilkan();
+
+});
