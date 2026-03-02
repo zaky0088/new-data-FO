@@ -115,6 +115,15 @@ if(d.status==="Maintenance") warna="maintenance";
 </tr>`;
 });
 
+  function updateClock(){
+    const now = new Date();
+    document.getElementById("clock").innerText =
+        now.toLocaleTimeString("id-ID");
+}
+
+setInterval(updateClock,1000);
+updateClock();
+  
 updateDashboard();
 }
 
