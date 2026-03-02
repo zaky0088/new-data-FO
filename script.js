@@ -81,6 +81,5 @@ tabel.innerHTML += `
 </tr>`;
 });
 
-});
 
 updateDasboard();
