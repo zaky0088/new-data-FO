@@ -87,8 +87,10 @@ tabel.innerHTML += `
 <td>${d.core}</td>
 <td>${d.panjang} m</td>
 <td>${d.teknisi}</td>
-<td>${d.status}</td>
-<td><button onclick="hapus(${i})">Hapus</button></td>
+<td>
+<button onclick="edit(${i})">Edit</button>
+<button onclick="hapus(${i})">Hapus</button>
+</td>
 </tr>`;
 });
 
