@@ -123,8 +123,25 @@ if(d.status==="Maintenance") warna="maintenance";
 
 setInterval(updateClock,1000);
 updateClock();
-  
-updateDashboard();
+
+ function cekGangguan(){
+
+    let putus = data.filter(d => d.status === "Putus").length;
+
+    const status = document.getElementById("networkStatus");
+
+    if(putus > 0){
+        status.innerHTML = "🔴 ALERT - Ada Jalur Putus!";
+        status.style.color = "red";
+
+        console.log("ALARM NOC!");
+    }else{
+        status.innerHTML = "🟢 Network Normal";
+        status.style.color = "lime";
+    }
+ }  
+
+  updateDashboard();
 }
 
 // load awal
