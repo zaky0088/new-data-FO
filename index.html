@@ -1,23 +1,31 @@
-<html>
+<!DOCTYPE html>
 <html lang="id">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Data Jalur Fiber Optik</title> 
-
+<title>Fiber Management System</title>
 <link rel="stylesheet" href="style.css">
-</head> 
+</head>
 
-<body> 
+<body>
 
-<h1>📡 DATA JALUR FIBER OPTIK</h1> 
+<h1>📡 FIBER MANAGEMENT SYSTEM</h1>
 
 <div class="form">
-    <input type="text" id="jalur" placeholder="Nama Jalur">
-    <input type="text" id="odp" placeholder="ODP">
-    <input type="number" id="core" placeholder="Core Used">
-    <button onclick="tambahData()">Tambah Jalur</button>
-</div> 
+<input id="jalur" placeholder="Nama Jalur">
+<input id="odp" placeholder="ODP">
+<input id="core" type="number" placeholder="Core Used">
+<input id="panjang" type="number" placeholder="Panjang (m)">
+<input id="teknisi" placeholder="Teknisi">
+
+<select id="status">
+<option value="Active">Active</option>
+<option value="Putus">Putus</option>
+<option value="Maintenance">Maintenance</option>
+</select>
+
+<button onclick="tambahData()">Tambah</button>
+</div>
 
 <table>
 <thead>
@@ -26,15 +34,17 @@
 <th>Jalur</th>
 <th>ODP</th>
 <th>Core</th>
+<th>Panjang</th>
+<th>Teknisi</th>
+<th>Status</th>
 <th>Aksi</th>
 </tr>
-</thead> 
+</thead>
 
-<tbody id="dataFiber"></tbody> 
+<tbody id="dataFiber"></tbody>
+</table>
 
-</table> 
-
-<script src="script.js"></script> 
+<script src="script.js"></script>
 
 </body>
 </html>
