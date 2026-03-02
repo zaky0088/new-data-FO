@@ -82,5 +82,5 @@ tabel.innerHTML += `
 });
 
 });
-F12 → Console
+
 updateDasboard();
