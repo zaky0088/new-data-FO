@@ -104,3 +104,10 @@ body{
 .danger{
   background:#3b0a0a;
 }
+#map{
+  height:400px;
+  width:95%;
+  margin:auto;
+  border-radius:10px;
+  margin-top:20px;
+}
