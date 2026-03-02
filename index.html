@@ -5,6 +5,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Fiber Management System</title>
 <link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css"/>
+<script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
 </head>
 
 <body>
@@ -57,6 +59,8 @@
 <input type="text" id="search" placeholder="🔍 Cari ODP / Jalur..." onkeyup="cariData()">
 
 <table>
+<h2>Monitoring Jalur Fiber</h2>
+<div id="map"></div>
 <thead>
 <tr>
 <th>No</th>
@@ -68,13 +72,11 @@
 <th>Status</th>
 <th>Aksi</th>
 </tr>
-<link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css"/>
 </thead>
 
 <tbody id="dataFiber"></tbody>
 </table>
 
 <script src="script.js"></script>
-<script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
 </body>
 </html>
