@@ -33,7 +33,21 @@ window.hapus = function(i){
   simpan();
   tampilkan();
 }
+window.edit = function(i){
 
+let d = data[i];
+
+document.getElementById("jalur").value = d.jalur;
+document.getElementById("odp").value = d.odp;
+document.getElementById("core").value = d.core;
+document.getElementById("panjang").value = d.panjang;
+document.getElementById("teknisi").value = d.teknisi;
+document.getElementById("status").value = d.status;
+
+data.splice(i,1);
+simpan();
+tampilkan();
+}
 // ================= CARI =================
 window.cariData = function(){
 
