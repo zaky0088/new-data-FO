@@ -30,6 +30,7 @@ data.push({jalur,odp,core,panjang,teknisi,status});
 
 simpan();
 tampilkan();
+alert("✅ Data berhasil ditambahkan");
 }
 
 // ================= HAPUS =================
