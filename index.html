@@ -35,6 +35,9 @@
  
   <div class="dashboard">
 
+  if(localStorage.getItem("login") !== "true"){
+  window.location.href = "login.html";
+}
 <div class="card">
 <h3>Total Jalur</h3>
 <p id="totalJalur">0</p>
