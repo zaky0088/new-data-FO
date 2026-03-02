@@ -20,7 +20,12 @@ if(!jalur || !odp){
   alert("Isi data dulu!");
   return;
 }
-
+document.getElementById("jalur").value="";
+document.getElementById("odp").value="";
+document.getElementById("core").value="";
+document.getElementById("panjang").value="";
+document.getElementById("teknisi").value="";
+  
 data.push({jalur,odp,core,panjang,teknisi,status});
 
 simpan();
