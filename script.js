@@ -1,3 +1,7 @@
+if(localStorage.getItem("login") !== "true"){
+   window.location.href = "login.html";
+}
+
 document.addEventListener("DOMContentLoaded", function(){
 
 let data = JSON.parse(localStorage.getItem("fiberData")) || [];
