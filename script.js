@@ -1,52 +1,59 @@
-
 document.addEventListener("DOMContentLoaded", function(){
 
 let data = JSON.parse(localStorage.getItem("fiberData")) || [];
 
-tampilkanData();
+tampilkan();
 
-function simpanData(){
-    localStorage.setItem("fiberData", JSON.stringify(data));
+function simpan(){
+localStorage.setItem("fiberData",JSON.stringify(data));
 }
 
-window.tambahData = function(){
+window.tambahData=function(){
 
-    let jalur = document.getElementById("jalur").value;
-    let odp = document.getElementById("odp").value;
-    let core = document.getElementById("core").value;
+let jalur=jalur.value;
+let odp=document.getElementById("odp").value;
+let core=document.getElementById("core").value;
+let panjang=document.getElementById("panjang").value;
+let teknisi=document.getElementById("teknisi").value;
+let status=document.getElementById("status").value;
 
-    if(!jalur || !odp || !core){
-        alert("Data belum lengkap!");
-        return;
-    }
+data.push({jalur,odp,core,panjang,teknisi,status});
 
-    data.push({jalur, odp, core});
-
-    simpanData();
-    tampilkanData();
+simpan();
+tampilkan();
 }
 
-window.hapus = function(index){
-    data.splice(index,1);
-    simpanData();
-    tampilkanData();
+window.hapus=function(i){
+data.splice(i,1);
+simpan();
+tampilkan();
 }
 
-function tampilkanData(){
+function tampilkan(){
 
-    let tabel = document.getElementById("dataFiber");
-    tabel.innerHTML="";
+let tabel=document.getElementById("dataFiber");
+tabel.innerHTML="";
 
-    data.forEach((d,i)=>{
-        tabel.innerHTML += `
-        <tr>
-        <td>${i+1}</td>
-        <td>${d.jalur}</td>
-        <td>${d.odp}</td>
-        <td>${d.core}</td>
-        <td><button onclick="hapus(${i})">Hapus</button></td>
-        </tr>`;
-    });
+data.forEach((d,i)=>{
+
+let warna="";
+
+if(d.status==="Active") warna="active";
+if(d.status==="Putus") warna="putus";
+if(d.status==="Maintenance") warna="maintenance";
+
+tabel.innerHTML+=`
+<tr class="${warna}">
+<td>${i+1}</td>
+<td>${d.jalur}</td>
+<td>${d.odp}</td>
+<td>${d.core}</td>
+<td>${d.panjang} m</td>
+<td>${d.teknisi}</td>
+<td>${d.status}</td>
+<td><button onclick="hapus(${i})">Hapus</button></td>
+</tr>`;
+});
 }
 
 });
