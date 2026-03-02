@@ -102,4 +102,3 @@ function hitungDashboard(){
     document.getElementById("totalPutus").innerText = putus;
 }
 tampilData();
-updateDashboard();
