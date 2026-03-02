@@ -144,7 +144,11 @@ updateClock();
         status.style.color = "lime";
     }
  }  
-
+function logout(){
+  localStorage.removeItem("login");
+  location.reload();
+}
+   
   updateDashboard();
 }
 
