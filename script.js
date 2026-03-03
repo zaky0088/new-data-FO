@@ -99,8 +99,9 @@ function updateDashboard(){
     document.getElementById("jalurPutus").innerText = putus;
 
     cekGangguan(putus);
-}
 
+}
+    
 // ================= TAMPILKAN DATA =================
 function tampilkan(){
 
@@ -120,7 +121,7 @@ function tampilkan(){
             <td>${d.jalur}</td>
             <td>${d.odp}</td>
             <td>${d.core}</td>
-            <td>${d.panjang ? d.panjang + " m" : "-"}</td>
+            <td>${d.panjang ? d.panjang : "-"}</td>
             <td>${d.teknisi}</td>
             <td class="${warna}">${d.status}</td>
             <td>
