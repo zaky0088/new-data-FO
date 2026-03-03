@@ -155,8 +155,18 @@ var map = L.map('map').setView([-6.2, 106.8], 13);
 L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
     attribution:'© OpenStreetMap'
 }).addTo(map);   
+var fiberLine = L.polyline([
+    [-6.201,106.81],
+    [-6.205,106.82],
+    [-6.210,106.83]
+], {
+    color: 'lime',
+    weight: 4
+}).addTo(map);
 
-   updateDashboard();
+fiberLine.bindPopup("Jalur FO SP-ODP");
+
+updateDashboard();
 }
 
 // load awal
