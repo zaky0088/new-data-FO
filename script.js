@@ -1,175 +1,173 @@
+// ================= PROTEKSI LOGIN =================
 if(localStorage.getItem("login") !== "true"){
-   window.location.href = "login.html";
+    window.location.href = "login.html";
 }
 
 document.addEventListener("DOMContentLoaded", function(){
 
+// ================= LOAD DATA =================
 let data = JSON.parse(localStorage.getItem("fiberData")) || [];
 
 function simpan(){
-  localStorage.setItem("fiberData", JSON.stringify(data));
+    localStorage.setItem("fiberData", JSON.stringify(data));
 }
 
 // ================= TAMBAH DATA =================
 window.tambahData = function(){
 
-let jalur = document.getElementById("jalur").value;
-let odp = document.getElementById("odp").value;
-let core = document.getElementById("core").value;
-let panjang = document.getElementById("panjang").value;
-let teknisi = document.getElementById("teknisi").value;
-let status = document.getElementById("status").value;
+    let jalur = document.getElementById("jalur").value;
+    let odp = document.getElementById("odp").value;
+    let core = document.getElementById("core").value;
+    let panjang = document.getElementById("panjang").value;
+    let teknisi = document.getElementById("teknisi").value;
+    let status = document.getElementById("status").value;
 
-if(!jalur || !odp){
-  alert("Isi data dulu!");
-  return;
-}
-document.getElementById("jalur").value="";
-document.getElementById("odp").value="";
-document.getElementById("core").value="";
-document.getElementById("panjang").value="";
-document.getElementById("teknisi").value="";
-  
-data.push({jalur,odp,core,panjang,teknisi,status});
+    if(!jalur || !odp){
+        alert("Isi data dulu!");
+        return;
+    }
 
-simpan();
-tampilkan();
-alert("✅ Data berhasil ditambahkan");
+    data.push({jalur,odp,core,panjang,teknisi,status});
+
+    simpan();
+    tampilkan();
+
+    // reset form
+    document.getElementById("jalur").value="";
+    document.getElementById("odp").value="";
+    document.getElementById("core").value="";
+    document.getElementById("panjang").value="";
+    document.getElementById("teknisi").value="";
+
+    alert("✅ Data berhasil ditambahkan");
 }
 
 // ================= HAPUS =================
 window.hapus = function(i){
-  data.splice(i,1);
-  simpan();
-  tampilkan();
+    data.splice(i,1);
+    simpan();
+    tampilkan();
 }
+
+// ================= EDIT =================
 window.edit = function(i){
 
-let d = data[i];
+    let d = data[i];
 
-document.getElementById("jalur").value = d.jalur;
-document.getElementById("odp").value = d.odp;
-document.getElementById("core").value = d.core;
-document.getElementById("panjang").value = d.panjang;
-document.getElementById("teknisi").value = d.teknisi;
-document.getElementById("status").value = d.status;
+    document.getElementById("jalur").value = d.jalur;
+    document.getElementById("odp").value = d.odp;
+    document.getElementById("core").value = d.core;
+    document.getElementById("panjang").value = d.panjang;
+    document.getElementById("teknisi").value = d.teknisi;
+    document.getElementById("status").value = d.status;
 
-data.splice(i,1);
-simpan();
-tampilkan();
+    data.splice(i,1);
+    simpan();
+    tampilkan();
 }
+
 // ================= CARI =================
 window.cariData = function(){
 
-let keyword = document.getElementById("search").value.toLowerCase();
-let rows = document.querySelectorAll("#dataFiber tr");
+    let keyword = document.getElementById("search").value.toLowerCase();
+    let rows = document.querySelectorAll("#dataFiber tr");
 
-rows.forEach(r=>{
-  r.style.display =
-    r.innerText.toLowerCase().includes(keyword)
-    ? ""
-    : "none";
-});
+    rows.forEach(r=>{
+        r.style.display =
+            r.innerText.toLowerCase().includes(keyword)
+            ? ""
+            : "none";
+    });
 }
 
 // ================= DASHBOARD =================
 function updateDashboard(){
 
-document.getElementById("totalJalur").innerText = data.length;
+    let totalJalur = data.length;
+    let totalCore = 0;
+    let putus = 0;
 
-let totalCore = 0;
-let putus = 0;
+    data.forEach(d=>{
+        totalCore += Number(d.core) || 0;
+        if(d.status && d.status.toLowerCase() === "putus"){
+            putus++;
+        }
+    });
 
-data.forEach(d=>{
-  totalCore += Number(d.core);
-  if(d.status === "Putus") putus++;
-});
+    document.getElementById("totalJalur").innerText = totalJalur;
+    document.getElementById("totalCore").innerText = totalCore;
+    document.getElementById("jalurPutus").innerText = putus;
 
-document.getElementById("totalCore").innerText = totalCore++;
-document.getElementById("jalurPutus").innerText = putus++;
+    cekGangguan(putus);
 }
 
-// ================= TAMPILKAN =================
+// ================= TAMPILKAN DATA =================
 function tampilkan(){
 
-let tabel = document.getElementById("dataFiber");
-tabel.innerHTML = "";
+    let tabel = document.getElementById("dataFiber");
+    tabel.innerHTML = "";
 
-data.forEach((d,i)=>{
+    data.forEach((d,i)=>{
 
-let warna="";
+        let warna="";
+        if(d.status==="Active") warna="active";
+        if(d.status==="Putus") warna="putus";
+        if(d.status==="Maintenance") warna="maintenance";
 
-if(d.status==="Active") warna="active";
-if(d.status==="Putus") warna="putus";
-if(d.status==="Maintenance") warna="maintenance";
+        tabel.innerHTML += `
+        <tr>
+            <td>${i+1}</td>
+            <td>${d.jalur}</td>
+            <td>${d.odp}</td>
+            <td>${d.core}</td>
+            <td>${d.panjang ? d.panjang + " m" : "-"}</td>
+            <td>${d.teknisi}</td>
+            <td class="${warna}">${d.status}</td>
+            <td>
+                <button onclick="edit(${i})">Edit</button>
+                <button onclick="hapus(${i})">Hapus</button>
+            </td>
+        </tr>`;
+    });
 
-  tabel.innerHTML += `
-<tr>
-<td>${i+1}</td>
-<td>${d.jalur}</td>
-<td>${d.odp}</td>
-<td>${d.core}</td>
-<td>${d.panjang ? d.panjang + " m" : "-"}</td>
-<td>${d.teknisi}</td>
-<td class="${warna}">${d.status}</td>
-<td>
-<button onclick="edit(${i})">Edit</button>
-<button onclick="hapus(${i})">Hapus</button>
-</td>
-</tr>`;
-});
+    updateDashboard();
+}
 
-  function updateClock(){
+// ================= STATUS NETWORK =================
+function cekGangguan(jumlahPutus){
+
+    const status = document.getElementById("networkStatus");
+
+    if(!status) return;
+
+    if(jumlahPutus > 0){
+        status.innerHTML = "🔴 ALERT - Ada Jalur Putus!";
+        status.style.color = "red";
+    }else{
+        status.innerHTML = "🟢 Network Normal";
+        status.style.color = "lime";
+    }
+}
+
+// ================= JAM REALTIME =================
+function updateClock(){
     const now = new Date();
-    document.getElementById("clock").innerText =
-        now.toLocaleTimeString("id-ID");
+    const clock = document.getElementById("clock");
+    if(clock){
+        clock.innerText = now.toLocaleTimeString("id-ID");
+    }
 }
 
 setInterval(updateClock,1000);
 updateClock();
 
- function cekGangguan(){
-
-    let putus = data.filter(d => d.status === "Putus").length;
-
-    const status = document.getElementById("networkStatus");
-
-    if(putus > 0){
-        status.innerHTML = "🔴 ALERT - Ada Jalur Putus!";
-        status.style.color = "red";
-
-        console.log("ALARM NOC!");
-    }else{
-        status.innerHTML = "🟢 Network Normal";
-        status.style.color = "lime";
-    }
- }  
-function logout(){
-  localStorage.removeItem("login");
-  location.reload();
-}
-// INIT MAP
-var map = L.map('map').setView([-6.2, 106.8], 13);
-
-// Tile map (gratis)
-L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-    attribution:'© OpenStreetMap'
-}).addTo(map);   
-var fiberLine = L.polyline([
-    [-6.201,106.81],
-    [-6.205,106.82],
-    [-6.210,106.83]
-], {
-    color: 'lime',
-    weight: 4
-}).addTo(map);
-
-fiberLine.bindPopup("Jalur FO SP-ODP");
-
-updateDashboard();
+// ================= LOGOUT =================
+window.logout = function(){
+    localStorage.removeItem("login");
+    window.location.href = "login.html";
 }
 
-// load awal
+// ================= LOAD AWAL =================
 tampilkan();
 
 });
