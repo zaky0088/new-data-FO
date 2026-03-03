@@ -85,8 +85,8 @@ data.forEach(d=>{
   if(d.status === "Putus") putus++;
 });
 
-document.getElementById("totalCore").innerText = totalCore;
-document.getElementById("jalurPutus").innerText = putus;
+document.getElementById("totalCore").innerText = totalCore++;
+document.getElementById("jalurPutus").innerText = putus++;
 }
 
 // ================= TAMPILKAN =================
