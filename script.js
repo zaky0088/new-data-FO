@@ -27,19 +27,25 @@ window.tambahData = function(){
         return;
     }
 
-    data.push({jalur,odp,core,panjang,teknisi,status});
+    let newData = {jalur,odp,core,panjang,teknisi,status};
+
+    if(editIndex === null){
+        data.push(newData);
+    }else{
+        data[editIndex] = newData;
+        editIndex = null;
+    }
 
     simpan();
     tampilkan();
 
-    // reset form
     document.getElementById("jalur").value="";
     document.getElementById("odp").value="";
     document.getElementById("core").value="";
     document.getElementById("panjang").value="";
     document.getElementById("teknisi").value="";
 
-    alert("✅ Data berhasil ditambahkan");
+    alert("✅ Data berhasil disimpan");
 }
 
 // ================= HAPUS =================
@@ -61,9 +67,7 @@ window.edit = function(i){
     document.getElementById("teknisi").value = d.teknisi;
     document.getElementById("status").value = d.status;
 
-    data.splice(i,1);
-    simpan();
-    tampilkan();
+    editIndex = i;
 }
 
 // ================= CARI =================
